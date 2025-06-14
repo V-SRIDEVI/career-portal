@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Roadmaps</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f9f9f9;
+    }
+    h2 {
+      text-align: center;
+    }
+    .back-home {
+      display: block;
+      width: fit-content;
+      margin: 0 auto 20px auto;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      text-align: center;
+      font-weight: bold;
+    }
+    select {
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #roadmapOutput {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px #ccc;
+      max-width: 800px;
+      margin: auto;
+      line-height: 1.6;
+    }
+    iframe {
+      border-radius: 10px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      width: 100%;
+      max-width: 560px;
+      height: 315px;
+    }
+    img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>📚 Class-wise Roadmaps</h2>
+
+  <a href="index.html" class="back-home">🔙 Back to Home</a>
+
+  <select id="classSelect" onchange="showRoadmap()">
+    <option value="">Select Class</option>
+    <option value="5">Class 5</option>
+    <option value="6">Class 6</option>
+    <option value="7">Class 7</option>
+    <option value="8">Class 8</option>
+    <option value="9">Class 9</option>
+    <option value="10">Class 10</option>
+  </select>
+
+  <div id="roadmapOutput"></div>
+
+  <script>
+    const roadmaps = {
+      "5": `
+        <h3>🧒 Class 5: Foundation Building</h3>
+        <p><strong>Importance:</strong> Build basic math, reading, and thinking skills.</p>
+        <p><strong>Focus Subjects:</strong> 📘 Basic Math, 🧪 Environmental Science, 📖 Reading, 🧠 Logical Thinking</p>
+        <p><strong>Tips:</strong> Use colorful books, games, and short videos. Make learning fun!</p>
+        <img src="https://www.educationquizzes.com/library/KS2/general-knowledge/images/general-knowledge-for-class-5.jpg" alt="Fun Learning Image for Class 5">
+        <iframe src="https://www.youtube.com/embed/ZaB52lph8gM" title="Fun Science for Class 5" allowfullscreen></iframe>
+      `,
+      "6": `
+        <h3>👦 Class 6: Foundation Strengthening</h3>
+        <p><strong>Focus:</strong> New subjects, start of real academic depth.</p>
+        <p><strong>Subjects:</strong> ➗ Fractions, 🌱 Science (plants), 📚 English grammar, 🧭 GK</p>
+        <p><strong>Tips:</strong> Practice daily, create flashcards, watch chapter-related videos.</p>
+        <iframe src="https://www.youtube.com/embed/OERnQuoZaEY" title="Science Class 6" allowfullscreen></iframe>
+      `,
+      "7": `
+        <h3>🧠 Class 7: Concept Development</h3>
+        <p><strong>Subjects:</strong> 📐 Algebra, ⚛️ Physics (motion), 💻 Computer Basics</p>
+        <p><strong>Skills:</strong> Logical reasoning, basic HTML, group activities</p>
+        <p><strong>Bonus:</strong> Try basic programming tools like Scratch!</p>
+        <iframe src="https://www.youtube.com/embed/iEu2tKEkY_I" title="Algebra Basics" allowfullscreen></iframe>
+      `,
+      "8": `
+        <h3>🎓 Class 8: Preparing for Higher Concepts</h3>
+        <p><strong>Subjects:</strong> ⚖️ Force & Pressure, 🔬 Light, 🧾 Constitution, 🌐 HTML</p>
+        <p><strong>Tips:</strong> Weekly revision, project notebooks, join school clubs</p>
+        <iframe src="https://www.youtube.com/embed/2AmldBXnzvY" title="Force & Pressure Explained" allowfullscreen></iframe>
+      `,
+      "9": `
+        <h3>📘 Class 9: Base for Boards</h3>
+        <p><strong>Subjects:</strong> 📊 Linear Equations, 🧪 Atoms, 🧬 Tissues, 🌍 SST</p>
+        <p><strong>Skills:</strong> Problem-solving, note-making, drawing diagrams</p>
+        <iframe src="https://www.youtube.com/embed/iWkQt0W0frE" title="Class 9 Science" allowfullscreen></iframe>
+      `,
+      "10": `
+        <h3>🎯 Class 10: Board Exam Year</h3>
+        <p><strong>Subjects:</strong> All Core Subjects - 📘 Science, 📐 Math, 📕 SST, 📖 English</p>
+        <p><strong>Preparation:</strong> 📅 Time table, 🔁 Multiple revisions, ✍️ Practice papers</p>
+        <iframe src="https://www.youtube.com/embed/a-AXEdvCjYc" title="Class 10 Board Strategy" allowfullscreen></iframe>
+      `
+    };
+
+    function showRoadmap() {
+      const selectedClass = document.getElementById("classSelect").value;
+      const outputDiv = document.getElementById("roadmapOutput");
+      outputDiv.innerHTML = roadmaps[selectedClass] || "<p>Please select a valid class.</p>";
+    }
+  </script>
+</body>
+</html>

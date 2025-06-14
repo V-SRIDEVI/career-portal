@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Feedback</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    textarea {
+      width: 300px;
+      height: 100px;
+    }
+    .stars {
+      display: inline-block;
+      font-size: 24px;
+      color: gray;
+      cursor: pointer;
+    }
+    .stars.active {
+      color: gold;
+    }
+    #feedbackList {
+      margin-top: 20px;
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+    }
+    .footer {
+      margin-top: 40px;
+      padding-top: 10px;
+      border-top: 2px solid teal;
+      font-style: italic;
+      text-align: center;
+      color: teal;
+    }
+    .feedback-item {
+      margin-bottom: 10px;
+    }
+    .delete-btn {
+      color: red;
+      cursor: pointer;
+      font-size: 12px;
+      margin-left: 10px;
+    }
+    .back-home {
+      display: inline-block;
+      margin: 10px 0 20px 0;
+      padding: 8px 15px;
+      background-color: #0d6efd;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    .back-home:hover {
+      background-color: #084298;
+    }
+  </style>
+</head>
+<body>
+  <h2>🗣️ Student Feedback</h2>
+  <a href="index.html" class="back-home">🔙 Back to Home</a>
+
+  <form id="feedbackForm">
+    Name: <input type="text" id="name" required><br><br>
+    Feedback: <br>
+    <textarea id="feedback" maxlength="300" required></textarea><br>
+    <small><span id="charCount">0</span>/300 characters</small><br><br>
+
+    Rating:
+    <div id="starRating">
+      <span class="stars">★</span>
+      <span class="stars">★</span>
+      <span class="stars">★</span>
+      <span class="stars">★</span>
+      <span class="stars">★</span>
+    </div><br>
+
+    <button type="submit">📤 Submit</button>
+  </form>
+
+  <div id="msg"></div>
+  <div id="feedbackList"></div>
+
+  <div class="footer">
+    💬 Developed and maintained by <strong>V SRIDEVI</strong><br>
+    📞 Contact: <a href="tel:+91-90259-00081">+91-90259-00081</a><br>
+    🌟 "Thank you for using the portal! Your thoughts inspire us to grow and serve better."
+  </div>
+
+  <script>
+    const starContainer = document.getElementById("starRating");
+    let selectedRating = 0;
+
+    starContainer.addEventListener("click", function(e) {
+      if (e.target.classList.contains("stars")) {
+        selectedRating = [...starContainer.children].indexOf(e.target) + 1;
+        updateStars();
+      }
+    });
+
+    function updateStars() {
+      [...starContainer.children].forEach((star, index) => {
+        star.className = index < selectedRating ? "stars active" : "stars";
+      });
+    }
+
+    document.getElementById("feedback").addEventListener("input", function() {
+      document.getElementById("charCount").innerText = this.value.length;
+    });
+
+    document.getElementById("feedbackForm").onsubmit = function(e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const feedback = document.getElementById("feedback").value;
+
+      const feedbackData = {
+        name,
+        feedback,
+        rating: selectedRating || "Not given",
+        date: new Date().toLocaleString()
+      };
+
+      const allFeedback = JSON.parse(localStorage.getItem("feedbacks") || "[]");
+      allFeedback.push(feedbackData);
+      localStorage.setItem("feedbacks", JSON.stringify(allFeedback));
+
+      document.getElementById("msg").innerText = `✅ Thank you, ${name}! Your feedback has been saved.`;
+      this.reset();
+      selectedRating = 0;
+      updateStars();
+      document.getElementById("charCount").innerText = 0;
+      displayFeedbacks();
+    };
+
+    function displayFeedbacks() {
+      const list = document.getElementById("feedbackList");
+      const allFeedback = JSON.parse(localStorage.getItem("feedbacks") || "[]").reverse();
+      list.innerHTML = "<h3>📝 Recent Feedback:</h3>" + allFeedback.slice(0, 5).map((f, i) =>
+        `<div class='feedback-item'><strong>${f.name}</strong> (${f.date}) 🌟 Rating: ${f.rating}★<br>${f.feedback}
+         <span class='delete-btn' onclick='deleteFeedback(${allFeedback.length - 1 - i})'>🗑️ Delete</span></div><hr>`
+      ).join("");
+    }
+
+    function deleteFeedback(index) {
+      let feedbacks = JSON.parse(localStorage.getItem("feedbacks") || "[]");
+      feedbacks.splice(index, 1);
+      localStorage.setItem("feedbacks", JSON.stringify(feedbacks));
+      displayFeedbacks();
+    }
+
+    displayFeedbacks();
+  </script>
+</body>
+</html>

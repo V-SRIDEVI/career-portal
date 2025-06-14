@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Career Guidance Portal</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 20px;
+    }
+    header, nav, main {
+      text-align: center;
+    }
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: teal;
+      font-weight: bold;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .card {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 15px;
+      background: #f9f9f9;
+    }
+    .search-bar {
+      margin-top: 20px;
+    }
+    .quiz-section {
+      text-align: left;
+      max-width: 500px;
+      margin: 30px auto;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      background: #fefefe;
+    }
+    .quiz-section h3 {
+      text-align: center;
+    }
+    .video-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 30px;
+    }
+    .video-section iframe {
+      border-radius: 8px;
+    }
+    .result {
+      margin-top: 10px;
+      font-weight: bold;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Career Guidance Portal</h1>
+    <nav>
+      <a href="roadmap.html">Roadmaps</a>
+      <a href="group-selection.html">Group Selection</a>
+      <a href="departments.html">Departments</a>
+      <a href="feedback.html">Feedback</a>
+    </nav>
+  </header>
+
+  <!-- 🔍 Search Bar -->
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search career, class, or subject..." style="padding: 10px; width: 60%;"/>
+    <button onclick="searchContent()" style="padding: 10px;">Search</button>
+    <p id="searchResult" style="color: red; font-style: italic;"></p>
+  </div>
+
+  <main>
+    <section class="intro">
+      <h2>Welcome!</h2>
+      <p>This portal helps students from Class 5 to 12 with career paths, group selection, and department guidance.</p>
+    </section>
+
+    <section class="cards">
+      <div class="card">
+        <h3>Roadmaps</h3>
+        <p>Clear steps from Class 5 to 10 to shape your academic foundation.</p>
+      </div>
+      <div class="card">
+        <h3>Group Selection</h3>
+        <p>Choose your stream after 10th based on your skills and interests.</p>
+      </div>
+      <div class="card">
+        <h3>After 12th?</h3>
+        <p>Explore departments and courses available after Class 12.</p>
+      </div>
+      <div class="card">
+        <h3>Feedback</h3>
+        <p>Share your experience and help us improve the platform.</p>
+      </div>
+    </section>
+
+    <section class="tips">
+      <h2>Career Tips</h2>
+      <ul>
+        <li>Identify your interests early and build on them.</li>
+        <li>Speak to mentors and career counselors.</li>
+        <li>Don’t hesitate to explore and try new activities.</li>
+        <li>Use this portal often for updates and planning.</li>
+      </ul>
+    </section>
+
+    <!-- 📊 Career Quiz -->
+    <section class="quiz-section">
+      <h3>Career Stream Suggestion Quiz</h3>
+      <p>What do you enjoy the most?</p>
+      <select id="question1">
+        <option value="0">-- Choose an answer --</option>
+        <option value="science">Solving science and math problems</option>
+        <option value="commerce">Learning about money, markets, or business</option>
+        <option value="arts">Reading history, stories, or helping society</option>
+      </select>
+      <p>Which subject do you score better in?</p>
+      <select id="question2">
+        <option value="0">-- Choose an answer --</option>
+        <option value="science">Math/Science</option>
+        <option value="commerce">Economics/Business</option>
+        <option value="arts">History/Languages</option>
+      </select>
+      <p>What do you want to do in future?</p>
+      <select id="question3">
+        <option value="0">-- Choose an answer --</option>
+        <option value="science">Engineer/Doctor/Scientist</option>
+        <option value="commerce">Business/Finance/CA</option>
+        <option value="arts">Teacher/Lawyer/Social Worker</option>
+      </select>
+      <button onclick="suggestStream()">Get Suggestion</button>
+      <p class="result" id="streamResult"></p>
+    </section>
+
+    <!-- 🎥 Career Videos -->
+    <section class="video-section">
+      <h2>Explore Careers Visually</h2>
+      <iframe width="300" height="180" src="https://www.youtube.com/embed/2UUGrEa7vDc" title="Career Options After 12th" allowfullscreen></iframe>
+      <iframe width="300" height="180" src="https://www.youtube.com/embed/7Q8hG0pYGn8" title="Stream Selection After 10th" allowfullscreen></iframe>
+    </section>
+  </main>
+
+  <!-- JS Scripts -->
+  <script>
+    // 🔍 Search
+    function searchContent() {
+      const input = document.getElementById("searchInput").value.toLowerCase();
+      const result = document.getElementById("searchResult");
+
+      if (input.includes("roadmap")) {
+        window.location.href = "roadmap.html";
+      } else if (input.includes("group")) {
+        window.location.href = "group-selection.html";
+      } else if (input.includes("department")) {
+        window.location.href = "departments.html";
+      } else if (input.includes("feedback")) {
+        window.location.href = "feedback.html";
+      } else {
+        result.textContent = "❌ No direct match found. Try a different keyword.";
+      }
+    }
+
+    // 📊 Quiz Logic
+    function suggestStream() {
+      const q1 = document.getElementById("question1").value;
+      const q2 = document.getElementById("question2").value;
+      const q3 = document.getElementById("question3").value;
+      const result = document.getElementById("streamResult");
+
+      if (q1 === "0" || q2 === "0" || q3 === "0") {
+        result.textContent = "Please answer all questions.";
+        return;
+      }
+
+      if (q1 === q2 && q2 === q3) {
+        if (q1 === "science") result.textContent = "✅ Suggested Stream: Science";
+        else if (q1 === "commerce") result.textContent = "✅ Suggested Stream: Commerce";
+        else result.textContent = "✅ Suggested Stream: Humanities/Arts";
+      } else {
+        result.textContent = "🤔 You have diverse interests. Consider exploring options in all fields or taking an aptitude test.";
+      }
+    }
+  </script>
+</body>
+</html>

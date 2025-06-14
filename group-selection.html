@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Group Selection After Class 10</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #eef2f3;
+      margin: 20px;
+      line-height: 1.6;
+    }
+    h2, h3 {
+      text-align: center;
+    }
+    .group-section {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 20px auto;
+      max-width: 900px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .quiz {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 20px auto;
+      max-width: 900px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .quiz label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #0d6efd;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background-color: #084298;
+    }
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #1e5d2b;
+    }
+    .back-home {
+      display: block;
+      width: fit-content;
+      margin: 10px auto 20px auto;
+      padding: 10px 20px;
+      background-color: #0d6efd;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      text-align: center;
+    }
+    .back-home:hover {
+      background-color: #084298;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🎓 Group Selection After Class 10</h2>
+
+  <a href="index.html" class="back-home">🔙 Back to Home</a>
+
+  <div class="group-section">
+    <h3>📐 Group 1 - Science (Math + Biology)</h3>
+    <p>This group is ideal for students who are interested in engineering, medicine, or pure science research. It includes subjects like Physics, Chemistry, Biology, and Mathematics.</p>
+    <ul>
+      <li>Career paths: Doctor, Engineer, Researcher, Scientist, Data Analyst</li>
+      <li>Good for: Problem-solvers, analytical thinkers, biology lovers</li>
+    </ul>
+  </div>
+
+  <div class="group-section">
+    <h3>🔬 Group 2 - Science (Biology only)</h3>
+    <p>This is suitable for students who are focused on biology-related careers but don't wish to take mathematics. Subjects include Physics, Chemistry, and Biology.</p>
+    <ul>
+      <li>Career paths: Doctor, Dentist, Biotechnologist, Nurse, Lab Technician</li>
+      <li>Good for: Strong interest in life sciences, human biology, nature</li>
+    </ul>
+  </div>
+
+  <div class="group-section">
+    <h3>📊 Group 3 - Commerce</h3>
+    <p>Commerce is for students who want to enter business, finance, or economics. Subjects include Accountancy, Economics, Business Studies, and optional Maths or Computer Science.</p>
+    <ul>
+      <li>Career paths: CA, Business Analyst, Banker, Entrepreneur</li>
+      <li>Good for: Number lovers, business-minded students, planners</li>
+    </ul>
+  </div>
+
+  <div class="group-section">
+    <h3>🖋️ Group 4 - Humanities / Arts</h3>
+    <p>This group focuses on social studies, psychology, literature, and creative subjects. Ideal for students with artistic or people-centered thinking.</p>
+    <ul>
+      <li>Career paths: Lawyer, Writer, Civil Services, Journalist, Psychologist</li>
+      <li>Good for: Readers, thinkers, creators, communicators</li>
+    </ul>
+  </div>
+
+  <div class="quiz">
+    <h3>🧠 Quiz: Which Group Might Suit You?</h3>
+    <form id="quizForm">
+      <label>
+        1. Do you enjoy solving numerical and logic problems?<br>
+        <input type="radio" name="q1" value="Science" required> Yes<br>
+        <input type="radio" name="q1" value="Arts"> No
+      </label>
+      <label>
+        2. Are you interested in human biology, animals or nature?<br>
+        <input type="radio" name="q2" value="Bio"> Yes<br>
+        <input type="radio" name="q2" value="Commerce"> No
+      </label>
+      <label>
+        3. Do you enjoy understanding markets, businesses and money flow?<br>
+        <input type="radio" name="q3" value="Commerce"> Yes<br>
+        <input type="radio" name="q3" value="Others"> No
+      </label>
+      <label>
+        4. Do you like reading stories, history or writing essays?<br>
+        <input type="radio" name="q4" value="Arts"> Yes<br>
+        <input type="radio" name="q4" value="Science"> No
+      </label>
+      <label>
+        5. Are you curious about how the human mind or society works?<br>
+        <input type="radio" name="q5" value="Arts"> Yes<br>
+        <input type="radio" name="q5" value="Commerce"> No
+      </label>
+      <button type="button" onclick="calculateResult()">Get My Recommended Group</button>
+    </form>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function calculateResult() {
+      const answers = document.querySelectorAll('input[type="radio"]:checked');
+      const count = {};
+
+      answers.forEach(ans => {
+        const val = ans.value;
+        count[val] = (count[val] || 0) + 1;
+      });
+
+      let recommended = "";
+      let max = 0;
+      for (const key in count) {
+        if (count[key] > max) {
+          max = count[key];
+          recommended = key;
+        }
+      }
+
+      const resultDiv = document.getElementById("result");
+      if (recommended === "Science") {
+        resultDiv.innerHTML = "✅ You are best suited for <strong>Group 1 - Science (Math + Bio)</strong>.";
+      } else if (recommended === "Bio") {
+        resultDiv.innerHTML = "✅ You are best suited for <strong>Group 2 - Science (Bio only)</strong>.";
+      } else if (recommended === "Commerce") {
+        resultDiv.innerHTML = "✅ You are best suited for <strong>Group 3 - Commerce</strong>.";
+      } else if (recommended === "Arts") {
+        resultDiv.innerHTML = "✅ You are best suited for <strong>Group 4 - Humanities / Arts</strong>.";
+      } else {
+        resultDiv.innerHTML = "📌 Please complete the quiz to get your result.";
+      }
+    }
+  </script>
+
+</body>
+</html>
